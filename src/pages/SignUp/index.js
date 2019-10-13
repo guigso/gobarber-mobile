@@ -23,6 +23,7 @@ export default function SignUp({ navigation }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const loading = useSelector(state => state.auth.loading);
 
   function handleSubmit() {
     dispatch(signUpRequest(name, email, password));
@@ -65,7 +66,9 @@ export default function SignUp({ navigation }) {
             value={password}
             onChangeText={setPassword}
           />
-          <SubmitButton onPress={handleSubmit}>Cadastrar</SubmitButton>
+          <SubmitButton loading={loading} onPress={handleSubmit}>
+            Cadastrar
+          </SubmitButton>
         </Form>
 
         <SignLink onPress={() => navigation.navigate('SignIn')}>

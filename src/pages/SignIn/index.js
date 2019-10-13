@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Image } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import logo from '~/assets/logo.png';
 
@@ -21,6 +21,8 @@ export default function SignIn({ navigation }) {
   const passwordRef = useRef();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const loading = useSelector(state => state.auth.loading);
 
   function handleSubmit() {
     dispatch(signInRequest(email, password));
@@ -52,7 +54,9 @@ export default function SignIn({ navigation }) {
             value={password}
             onChangeText={setPassword}
           />
-          <SubmitButton onPress={handleSubmit}>Acessar</SubmitButton>
+          <SubmitButton onPress={handleSubmit} loading={loading}>
+            Acessar
+          </SubmitButton>
         </Form>
 
         <SignLink onPress={() => navigation.navigate('SignUp')}>
